@@ -1,0 +1,102 @@
+/* Base styling - this applies to all modes */
+body, p, h1, h2, h3, h4, h5, h6, li, span, div {
+    color: inherit !important;
+  }
+  
+  /* Dark mode styling (bright green) */
+  @media (prefers-color-scheme: dark) {
+    body, p, h1, h2, h3, h4, h5, h6, li, span, div, 
+    .article, .article p, .article li, .article span,
+    .sidebar, .popover, .search-result, footer {
+      color: #00FF00 !important;
+    }
+    
+    a, a:visited {
+      color: #66FF66 !important;
+    }
+    
+    a:hover {
+      color: #99FF99 !important;
+      text-decoration: underline;
+    }
+  }
+  
+  /* Light mode styling (darker green for readability) */
+  @media (prefers-color-scheme: light) {
+    body, p, h1, h2, h3, h4, h5, h6, li, span, div,
+    .article, .article p, .article li, .article span,
+    .sidebar, .popover, .search-result, footer {
+      color: #006400 !important; /* Dark green - good contrast on white */
+    }
+    
+    a, a:visited {
+      color: #228B22 !important; /* Forest green for links */
+    }
+    
+    a:hover {
+      color: #3CB371 !important; /* Medium sea green */
+      text-decoration: underline;
+    }
+  }
+  
+  /* Override for any elements with specific styling */
+  .forcedark {
+    color: #00FF00 !important;
+  }
+  
+  .forcelight {
+    color: #006400 !important;
+  }
+  
+  /* Target specific Quartz classes for better coverage */
+  .article, .article p, .article li, .article span {
+    color: #00FF00 !important; /* Pure bright green */
+  }
+  
+  /* Brighter link styling */
+  a, a:visited {
+    color: #66FF66 !important; /* Bright green for links */
+  }
+  
+  a:hover {
+    color: #99FF99 !important; /* Lighter bright green */
+    text-decoration: underline;
+  }
+  
+  /* Additional elements that might need forcing */
+  .sidebar, .popover, .search-result, footer {
+    color: #00FF00 !important;
+  }
+  
+  /* Force override any custom elements */
+  * {
+    color: #00FF00 !important;
+  }
+  
+  /* Only exclude links from the all-selector override */
+  a, a:visited, a:hover {
+    color: #66FF66 !important;
+  }
+  
+  a:hover {
+    color: #99FF99 !important;
+  }
+  
+  /* Super aggressive footer removal */
+  footer, 
+  .page-footer, 
+  footer *, 
+  .footer,
+  [class*="footer"],
+  div[class*="footer"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    pointer-events: none !important;
+  } 
