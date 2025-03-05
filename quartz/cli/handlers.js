@@ -155,7 +155,7 @@ export async function handleCreate(argv) {
     await fs.promises.writeFile(
       path.join(contentFolder, "index.md"),
       `---
-title: Welcome to Quartz
+title: Welcome to QuartzNANANANANANANANANA
 ---
 
 This is a blank Quartz installation.
