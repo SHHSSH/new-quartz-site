@@ -8,10 +8,10 @@ function Peridot(props: QuartzComponentProps) {
         id="peridot-container" 
         style={{ 
           width: "100%", 
-          height: "400px",
+          height: "250px",
           borderRadius: "8px",
           overflow: "hidden",
-          marginBottom: "2rem"
+          marginBottom: "1rem"
         }}
       ></div>
     </div>
