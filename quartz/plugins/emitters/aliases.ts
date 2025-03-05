@@ -1,8 +1,8 @@
-import { FilePath, joinSegments, resolveRelative, simplifySlug } from "../../util/path"
+import { FilePath, FullSlug, joinSegments, resolveRelative, simplifySlug } from "../../util/path"
 import { QuartzEmitterPlugin } from "../types"
+import path from "path"
 import { write } from "./helpers"
 import DepGraph from "../../depgraph"
-import { getAliasSlugs } from "../transformers/frontmatter"
 
 export const AliasRedirects: QuartzEmitterPlugin = () => ({
   name: "AliasRedirects",
@@ -14,7 +14,20 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
 
     const { argv } = ctx
     for (const [_tree, file] of content) {
-      for (const slug of getAliasSlugs(file.data.frontmatter?.aliases ?? [], argv, file)) {
+      const dir = path.posix.relative(argv.directory, path.dirname(file.data.filePath!))
+      const aliases = file.data.frontmatter?.aliases ?? []
+      const slugs = aliases.map((alias) => path.posix.join(dir, alias) as FullSlug)
+      const permalink = file.data.frontmatter?.permalink
+      if (typeof permalink === "string") {
+        slugs.push(permalink as FullSlug)
+      }
+
+      for (let slug of slugs) {
+        // fix any slugs that have trailing slash
+        if (slug.endsWith("/")) {
+          slug = joinSegments(slug, "index") as FullSlug
+        }
+
         graph.addEdge(file.data.filePath!, joinSegments(argv.output, slug + ".html") as FilePath)
       }
     }
@@ -27,8 +40,20 @@ export const AliasRedirects: QuartzEmitterPlugin = () => ({
 
     for (const [_tree, file] of content) {
       const ogSlug = simplifySlug(file.data.slug!)
+      const dir = path.posix.relative(argv.directory, path.dirname(file.data.filePath!))
+      const aliases = file.data.frontmatter?.aliases ?? []
+      const slugs: FullSlug[] = aliases.map((alias) => path.posix.join(dir, alias) as FullSlug)
+      const permalink = file.data.frontmatter?.permalink
+      if (typeof permalink === "string") {
+        slugs.push(permalink as FullSlug)
+      }
 
-      for (const slug of file.data.aliases ?? []) {
+      for (let slug of slugs) {
+        // fix any slugs that have trailing slash
+        if (slug.endsWith("/")) {
+          slug = joinSegments(slug, "index") as FullSlug
+        }
+
         const redirUrl = resolveRelative(slug, file.data.slug!)
         const fp = await write({
           ctx,

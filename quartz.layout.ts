@@ -1,6 +1,5 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
-import Peridot from "./quartz/components/Peridot"
 
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -22,7 +21,6 @@ export const defaultContentPageLayout: PageLayout = {
     Component.ArticleTitle(),
     Component.ContentMeta(),
     Component.TagList(),
-    Peridot(),
   ],
   left: [
     Component.PageTitle(),

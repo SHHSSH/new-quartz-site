@@ -1,4 +1,4 @@
-import { QuartzConfig } from "./quartz/cfg"
+import { QuartzConfig, defineConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 import "./styles/custom.css"
 import CustomFooter from "./quartz/components/CustomFooter"
@@ -10,7 +10,7 @@ import CustomFooter from "./quartz/components/CustomFooter"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "🪴 Quartz 4.0",
+    pageTitle: "🪴 Bananarama11",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -18,7 +18,7 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
+    baseUrl: "shhssh.github.io/quartz-site",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
     generateSocialImages: false,
@@ -36,9 +36,9 @@ const config: QuartzConfig = {
           lightgray: "#e5e5e5",
           gray: "#b8b8b8",
           darkgray: "#4e4e4e",
-          dark: "#006400",         // Dark green for light mode
-          secondary: "#228B22",    // Forest green for links
-          tertiary: "#3CB371",     // Medium sea green
+          dark: "#006400",
+          secondary: "#228B22",
+          tertiary: "#3CB371",
           highlight: "rgba(143, 159, 169, 0.15)",
           textHighlight: "#fff23688",
         },
@@ -47,13 +47,16 @@ const config: QuartzConfig = {
           lightgray: "#393639",
           gray: "#646464",
           darkgray: "#d4d4d4",
-          dark: "#00FF00",         // Bright green for dark mode
-          secondary: "#66FF66",    // Bright green for links
-          tertiary: "#99FF99",     // Lighter bright green
+          dark: "#00FF00",
+          secondary: "#66FF66",
+          tertiary: "#99FF99",
           highlight: "rgba(143, 159, 169, 0.15)",
           textHighlight: "#b3aa0288",
-        },
+      },  
       },
+    },
+    components: {
+      Footer: CustomFooter
     },
   },
   plugins: {
@@ -88,7 +91,9 @@ const config: QuartzConfig = {
         enableRSS: true,
       }),
       Plugin.Assets(),
-      Plugin.Static(),
+      Plugin.Static({
+        assets: ["styles/footer-mod.js"]
+      }),
       Plugin.NotFoundPage(),
     ],
   },
