@@ -1,0 +1,13 @@
+/* Change the base text color to green */
+body {
+  color: #00a86b !important;
+}
+
+/* You might want to adjust link colors too */
+a {
+  color: #2a9d8f !important;
+}
+
+a:hover {
+  color: #8eedc7 !important;
+} 
